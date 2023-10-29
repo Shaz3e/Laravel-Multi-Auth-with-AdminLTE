@@ -2,33 +2,17 @@
 
 namespace App\Http\Controllers\User\Auth;
 
-use App\Helpers\LogActivity;
 use App\Http\Controllers\Controller;
 use App\Mail\Admin\RegisterEmail as AdminRegisterEmail;
-use App\Mail\NotificationAdminUserRegistration;
 use App\Mail\User\RegisterEmail;
-use App\Models\AccountTypes;
-use App\Models\Countries;
-use App\Models\TradingAccounts;
 use App\Models\User;
-use App\Models\Wallets;
-use CMT5Request;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\UserRegistrationEmail;
-use App\Models\AppSettings;
-use App\Models\IbClients;
-use App\Models\Leverages;
-use App\Models\ReferralTree;
-use Illuminate\Auth\Events\Registered;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Cookie;
 
 class RegisteredUserController extends Controller
 {
@@ -84,18 +68,18 @@ class RegisteredUserController extends Controller
         /**
          * Prepare email data
          */
-        $mailData = [
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => $request->password,
-            'url' => config('app.url'),
-        ];
+        // $mailData = [
+        //     'name' => $request->name,
+        //     'email' => $request->email,
+        //     'password' => $request->password,
+        //     'url' => config('app.url'),
+        // ];
 
         /**
          * Send email
          */
-        $adminEmail = '';
-        Mail::to($request->email)->send(new RegisterEmail($mailData));
+        // $adminEmail = '';
+        // Mail::to($request->email)->send(new RegisterEmail($mailData));
         // Mail::to($adminEmail)->send(new AdminRegisterEmail($mailData));
 
         // $this->guard()->login($user);
