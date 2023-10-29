@@ -3,8 +3,8 @@
 
     <!-- Brand Logo -->
     <a href="/admin" class="brand-link">
-        <img src="{{ asset('dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-        <span class="brand-text font-weight-light">AdminLTE 3</span>
+        <img src="{{ asset('dist/img/AdminLTELogo.png') }}" alt="{{ config('app.name') }}" class="brand-image img-circle elevation-3" style="opacity: .8">
+        <span class="brand-text font-weight-light">{{ config('app.name') }}</span>
       </a>
 
     <!-- Sidebar -->
@@ -39,7 +39,7 @@
                 <li class="nav-item">
                     <a href="{{ URL::to('/admin/staff') }}"
                         class="nav-link {{ request()->is('admin/staff') || request()->is('admin/staff/*') ? 'active' : '' }}">
-                        <i class="nav-icon fa-solid fa-gauge-high"></i>
+                        <i class="nav-icon fa-solid fa-users-gear"></i>
                         <p>Staff Management</p>
                     </a>
                 </li>
@@ -48,7 +48,7 @@
                 <li class="nav-item">
                     <a href="{{ URL::to('/admin/users') }}"
                         class="nav-link {{ request()->is('admin/users') || request()->is('admin/users/*') ? 'active' : '' }}">
-                        <i class="nav-icon fa-solid fa-gauge-high"></i>
+                        <i class="nav-icon fa-solid fa-users"></i>
                         <p>Users Management</p>
                     </a>
                 </li>
