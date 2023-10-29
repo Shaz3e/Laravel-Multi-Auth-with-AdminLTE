@@ -6,8 +6,11 @@ use App\Http\Controllers\Controller;
 
 class AdminDashboardController extends Controller
 {
-    // View Folder
+    // View
     protected $view = 'admin.';
+
+    // Route
+    protected $route = 'admin';
 
     public function dashboard()
     {
