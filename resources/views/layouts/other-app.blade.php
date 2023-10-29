@@ -99,9 +99,15 @@
                 settingApplyElement.addClass('dark-mode'); // Body
                 settingApplyElement2.addClass('navbar-dark'); // Nav
             } else if (settingName == null) {
-                checkElement.removeAttr("checked"); // Remove Check
-                settingApplyElement.removeClass('dark-mode'); // Body
-                settingApplyElement2.addClass('navbar-white navbar-light'); // Nav
+                if ("dark_mode" == 1) {
+                    checkElement.attr("checked", true); // Checked
+                    settingApplyElement.addClass('dark-mode'); // Body
+                    settingApplyElement2.addClass('navbar-dark'); // Nav
+                } else {
+                    checkElement.removeAttr("checked"); // Remove Check
+                    settingApplyElement.removeClass('dark-mode'); // Body
+                    settingApplyElement2.addClass('navbar-white navbar-light'); // Nav
+                }
             }
         }
 
@@ -114,7 +120,11 @@
             let themeMode = localStorage.getItem('Dark-Mode');
 
             if (themeMode == null) {
-                themeMode = "light";
+                if ("dark_mode" == 1) {
+                    themeMode = "dark";
+                } else {
+                    themeMode = "light";
+                }
             } else {
                 if (themeMode == 1) {
                     themeMode = "dark";
@@ -125,6 +135,9 @@
             let themeColorSelect = $("#themeColorSettingsSelect");
             let sidebar = $(".main-sidebar");
 
+            if (themeColor == null) {
+                themeColor = "primary";
+            }
             themeColorSelect.removeClass(
                 'bg-white bg-danger bg-fuchsia bg-indigo bg-info bg-lightblue bg-lime bg-maroon bg-navy bg-orange bg-olive bg-pink bg-primary bg-purple bg-success bg-teal bg-warning'
             );
@@ -179,7 +192,7 @@
             if (themeColor != "") {
                 localStorage.setItem('Theme-Color', themeColor);
             } else {
-                localStorage.setItem('Theme-Color', 'primary');
+                localStorage.setItem('Theme-Color', "theme_color");
             }
             ShowThemeColor();
         }
