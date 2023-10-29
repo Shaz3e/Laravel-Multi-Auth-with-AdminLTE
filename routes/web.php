@@ -3,17 +3,22 @@
 // Facades
 use Illuminate\Support\Facades\Route;
 
-// Admin
+// Admin Login
 use App\Http\Controllers\Admin\Auth\AuthenticatedSessionController as AdminAuthenticatedSessionController;
-use App\Http\Controllers\Admin\AdminDashboardController;
-use App\Http\Controllers\User\UserDashboardController;
 
+// Admin Controllers
+use App\Http\Controllers\Admin\AdminDashboardController;
+use App\Http\Controllers\Admin\StaffController;
+use App\Http\Controllers\Admin\UserController;
 // User Login
 use App\Http\Controllers\User\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\User\Auth\NewPasswordController;
 use App\Http\Controllers\User\Auth\PasswordResetLinkController;
 use App\Http\Controllers\User\Auth\RegisteredUserController;
 use App\Http\Controllers\User\Auth\EmailVerificationController;
+
+// User Controller
+use App\Http\Controllers\User\UserDashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -67,11 +72,24 @@ Route::prefix('admin')->name('admin.')->group(function () {
         /**
          * Admin Dashboard
          */
-        // Route::get('', function () {
-        //     return view('admin.dashboard');
-        // });
-
         Route::get('/', [AdminDashboardController::class, 'dashboard'])->name('dashboard');
+
+        /**
+         * Current Auth User Profile and Update
+         */
+        Route::get('/profile', [AdminDashboardController::class, 'profile'])->name('profile');
+        Route::post('/profile/update-profile', [AdminDashboardController::class, 'updateProfile'])->name('profile.updateProfile');
+        Route::post('/profile/update-password', [AdminDashboardController::class, 'updatePassword'])->name('profile.updatePassword');
+
+        /**
+         * Admin Users
+         */
+        Route::resource('staff', StaffController::class);
+
+        /**
+         * Clients or Users
+         */
+        Route::resource('users', UserController::class);
 
         /**
          * Logout

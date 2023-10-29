@@ -29,9 +29,27 @@
                 {{-- Dashboard --}}
                 <li class="nav-item">
                     <a href="{{ URL::to('/admin') }}"
-                        class="nav-link {{ request()->is('/admin*') || request()->is('/admin') ? 'active' : '' }}">
+                        class="nav-link {{ request()->is('admin') ? 'active' : '' }}">
                         <i class="nav-icon fa-solid fa-gauge-high"></i>
                         <p>Dashboard</p>
+                    </a>
+                </li>
+
+                {{-- Staff --}}
+                <li class="nav-item">
+                    <a href="{{ URL::to('/admin/staff') }}"
+                        class="nav-link {{ request()->is('admin/staff') || request()->is('admin/staff/*') ? 'active' : '' }}">
+                        <i class="nav-icon fa-solid fa-gauge-high"></i>
+                        <p>Staff Management</p>
+                    </a>
+                </li>
+
+                {{-- Users --}}
+                <li class="nav-item">
+                    <a href="{{ URL::to('/admin/users') }}"
+                        class="nav-link {{ request()->is('admin/users') || request()->is('admin/users/*') ? 'active' : '' }}">
+                        <i class="nav-icon fa-solid fa-gauge-high"></i>
+                        <p>Users Management</p>
                     </a>
                 </li>
 
