@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
@@ -213,5 +214,69 @@ class UserController extends Controller
         }
 
         return redirect($this->route);
+    }
+
+    /**
+     * Login as User
+     */
+    public function loginAs($userId)
+    {
+        global $request;
+
+        // Get the user by ID
+        $user = User::find($userId);
+
+        if ($user) {
+            session(['original_user_id' => $user->id]);
+
+            Auth::login($user);
+
+            Session::flash('message', [
+                'text' => 'Logged in as ' . $user->name,
+            ]);
+            return redirect('/');
+        } else {
+            // Handle the case when the user is not found
+            // You can throw an exception, redirect the user, or display an error message
+            Session::flash('warning', [
+                'text' => 'Unable to login as Client',
+            ]);
+            return redirect()->back();
+        }
+    }
+
+    /**
+     * Login Back to Admin
+     */
+    public function loginBack()
+    {
+        global $request;
+        // Get the original user's ID from the session
+        $originalUserId = session('original_user_id');
+
+        // Get the original user by ID
+        $originalUser = User::find($originalUserId);
+
+        if ($originalUser) {
+            // Log in as the original user
+            Auth::login($originalUser);
+
+            // Clear the original user's ID from the session
+            session()->forget('original_user_id');
+
+            Session::flash('message', [
+                'text' => 'Logged in as ' . $originalUser->name,
+            ]);
+
+            return redirect('/admin');
+        } else {
+            // Handle the case when the original user is not found
+            // You can throw an exception, redirect the user, or display an error message
+            Session::flash('error', [
+                'text' => 'Unable to login',
+            ]);
+
+            return redirect()->back();
+        }
     }
 }

@@ -3,9 +3,10 @@
 
     <!-- Brand Logo -->
     <a href="/" class="brand-link">
-        <img src="{{ asset('dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+        <img src="{{ asset('dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+            style="opacity: .8">
         <span class="brand-text font-weight-light">AdminLTE 3</span>
-      </a>
+    </a>
 
     <!-- Sidebar -->
     <div class="sidebar">
@@ -16,11 +17,10 @@
                 <img src="{{ asset('avatars/avatar.jpg') }}" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="{{ URL::to('/profile') }}"
-                    class="d-block text-theme">{{ Auth::user()->name }}</a>
+                <a href="{{ URL::to('/profile') }}" class="d-block text-theme">{{ Auth::user()->name }}</a>
             </div>
         </div>
-        
+
         @if (Auth::guard('admin')->user())
             <div class="user-panel mt-0 pb-2 mb-2">
                 <div class="info  py-0 px-1">

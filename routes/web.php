@@ -82,6 +82,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('/profile/update-password', [AdminDashboardController::class, 'updatePassword'])->name('profile.updatePassword');
 
         /**
+         * Login As Client or Login Back as Admin
+         */
+        Route::get('users/{id}/loginAs', [UserController::class, 'loginAs'])->name('user.loginAs');
+        Route::get('login-back', [UserController::class, 'loginBack'])->name('user.login-back');
+
+        /**
          * Admin Users
          */
         Route::resource('staff', StaffController::class);

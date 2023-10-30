@@ -52,7 +52,8 @@
                         <tbody>
                             @foreach ($dataSet as $data)
                                 <tr>
-                                    <td>{{ $data->name }}</td>
+                                    <td><a href="{{ URL::to('admin/users/' . $data->id) }}/loginAs" class="text-theme">
+                                            {{ $data->name }}</a></td>
                                     <td>{{ $data->email }}</td>
                                     <td>
                                         <a class="btn btn-flat btn-primary"
